@@ -237,8 +237,6 @@ show_menu() {
     echo "  3. Only install additional packages"
     echo "  4. Only Install/Update configs and dotfiles"
     echo
-    read -p "Please select an option [1-4]: " -n 1 -r
-    echo
 }
 
 # Main function
@@ -252,7 +250,7 @@ main() {
 
     # Show menu and get user selection
     show_menu
-    read -r choice
+    read -p "Please select an option [1-4]: " choice
 
     case "$choice" in
         1)
