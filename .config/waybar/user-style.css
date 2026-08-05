@@ -1,0 +1,12 @@
+/* User custom styles */
+
+
+#workspaces button {
+    min-height: 0;
+    }
+
+#workspaces button.active {
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+}
+

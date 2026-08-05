@@ -1,0 +1,254 @@
+/* - Import wallbash for text color - */
+
+@import "/home/perletero/.cache/hyde/wallbash/gtk.css";
+
+/* - Import Waybar theme to match accent colors - */
+
+@import "/home/perletero/.config/waybar/theme.css";
+
+/* 
+PS : Would probably be better to create a new .dcol for swaync using the same colors as waybay + text instead of importing two different ones, it would also remove the need for this file to be processed by wallbash. (or just add text colors to the waybar.dcol even if waybar don't use it and only import the waybar theme.css ? I didn't do it to keep everything "vanilla" friendly so anyone can use this without making any changes to other files) 
+
+PS2: Nevermind, i should just learn how to properly use wallbash since all the necessary colors are already provided in the gtk.css ... god i suck at css ...
+*/ 
+
+
+/* --- Global Variables --- */
+
+/* @define-color bg @main-bg; # Replace "bg" with this line for opaque version */
+
+@define-color bg alpha(@main-bg,0.01);
+@define-color bg-opaque @main-bg;
+@define-Color bg-notif alpha(@main-bg,0.08);
+@define-color text #FFFFFF;
+@define-color text-disabled #181617;
+@define-color accent-color @wb-act-bg;
+@define-color border-color alpha(@accent-color, 0.5);
+@define-color close-button alpha(@main-bg,0.5);
+@define-color button-hover alpha(@accent-color, 0.5);
+
+
+/* --- Control center --- */
+
+
+.control-center {
+  /* The Control Center which contains the old notifications + widgets */
+    background: @bg;
+    color: @text;
+    border-radius: 16px;
+    border: 2px solid @border-color;
+    opacity: 0.9;
+}
+
+
+/* --- Notifications --- */
+
+
+/* The actual notification */
+
+.notification-row .notification-background .notification {
+    color: @text;
+    border-radius: 16px;
+    border: 2px solid @border-color;
+    padding: 5;
+    transition: background 0.15s ease-in-out;
+    background: @bg-notif;
+    opacity: 0.8;
+}
+
+/* - Close button for notification/control center - */
+
+
+.close-button {
+  background: @close-button;
+  color: @text;
+}
+
+.close-button:hover {
+  background: @button-hover;
+}
+
+/* - Notification action button - */
+
+.notification-default-action,
+.notification-action {
+    background: @bg-notif;
+    color: @text;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+  background: @button-hover;
+}
+
+/* - Notification text - */
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+  /* Notification summary/title */
+    font-size: 16px;
+    font-weight: bold;
+    background: transparent;
+    color: @text;
+    text-shadow: none;
+}
+
+/* - Notification Group - */
+
+
+.notification-group {
+    background: transparent;
+}
+
+.notification-row .notification-background .notification .notification-default-action:hover {
+    background: @button-hover;
+}
+
+.notification-group .notification-group-headers .notification-group-icon {
+    color: @text;
+}
+
+.notification-group.collapsed .notification-group-headers .notification-group-icon {
+    color: @text;
+}
+
+.notification-group.collapsed .notification-row .notification {
+    background-color: @bg-notif;
+}
+
+.notification-group.collapsed .notification-row:not(:only-child) .notification {
+    background-color: @bg-notif; 
+}
+
+.notification-group.collapsed:hover .notification-row:not(:only-child) .notification {
+    background-color: @button-hover; 
+}
+
+/* --- Widgets --- */
+
+
+.widget-title {
+    color: @text;
+}
+
+.widget-title > button {
+    color: @text;
+    background: @accent-color;
+}
+
+.widget-title > button:hover {
+    border: none;
+    background: @button-hover;
+}
+
+
+/* - Flowbox - */
+
+.widget-buttons-grid {
+    background: transparent;
+    box-shadow: none;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+    background: @accent-color;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked label {
+    color: @text-disabled;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+    background: @close-button;
+    box-shadow: none;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+    background: @button-hover;
+}
+
+/* - MPRIS - */
+
+.widget-mpris .widget-mpris-player {
+    background-color: @close-button;
+}
+
+.widget-mpris .widget-mpris-player button:hover {
+    background-color: @button-hover;
+}
+
+.widget-mpris .widget-mpris-player button {
+    color:@text;
+}
+
+
+.topbar-buttons > button {
+    border: none;
+    background: @close-button;
+}
+  
+/* - Volume/Backlight - */
+
+
+.widget-volume {
+  background:transparent;
+}
+
+.widget-backlight {
+  background:transparent;
+}
+
+.widget-volume trough, 
+.widget-backlight trough {
+  background: transparent;
+}
+
+.widget-volume highlight, 
+.widget-backlight highlight {
+  background: @accent-color;
+}
+
+.widget-volume label, 
+.widget-backlight label {
+  color: @text;
+}
+
+.widget-volume slider, 
+.widget-backlight slider {
+  background: @accent-color;
+  box-shadow: none;
+}
+
+.widget-volume slider:hover, 
+.widget-backlight slider:hover {
+  box-shadow: none; 
+    
+}
+
+/* - Clear All - */
+
+.control-center-clear-all {
+    color: @text;
+    background: @bg-notif;
+}
+
+.control-center-clear-all:hover {
+    background: @button-hover;
+}
+
+/* - DND - */
+
+.control-center-dnd {
+  background: @bg;
+}
+
+.control-center-dnd:checked {
+  background: @accent-color;
+}
+
+.control-center-dnd slider:hover {
+  background: @text;
+}
+
+.control-center-dnd slider {
+  background: @text;
+  box-shadow: none;
+}

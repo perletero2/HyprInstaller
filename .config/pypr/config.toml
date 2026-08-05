@@ -1,0 +1,68 @@
+# Since Pyprland is very configurable, this is just a basic example config
+# to get you started. For more information, see the Pyprland documentation:
+# https://hyprland-community.github.io/pyprland/
+
+
+# Since You are using Hyde, you can use `hyde-shell` to run pypr commands
+# See  'hyde-shell pypr --help' for more information on how to use it!
+
+[pyprland]
+    # pypr has a lot of plugins, but this is just a basic example config
+    # https://hyprland-community.github.io/pyprland/Plugins.html
+    plugins = [ "scratchpads" ]
+    notification_type = "notify-send"
+
+# using variables for demonstration purposes (not needed)
+[pyprland.variables]
+    # term_with_class = "hyde-shell app -T" # You cannot set the class for this
+    # term_with_class = "alacritty --class"
+    # term_with_class = "foot --app-id"
+    term_with_class = "kitty --class"
+
+[scratchpads.console]
+    # This is a drop-down terminal configuration
+    animation = "fromTop"
+    class     = "console-dropdown"
+    command   = "[term_with_class] console-dropdown"
+    max_size  = "90% 100%"
+    size      = "75% 60%"
+
+
+[scratchpads.rmpc]
+    #Dropdown terminal with rmpc
+    animation = "fromTop"
+    class     = "rmpc"
+    command   = "[term_with_class] rmpc-dropdown rmpc"
+    max_size  = "90% 100%"
+    size      = "75% 60%"
+    lazy      = "true"
+    unfocus   = "hide"
+    close_on_hide = "true"
+
+[scratchpads.ollama-manager]
+    #Dropdown terminal with Ollama chat
+    animation = "fromBottom"
+    class     = "ollama"
+    command   = "[term_with_class] ollama-dropdown ~/.scripts/ollama/ollama-menu.sh -m"
+    max_size  = "90% 100%"
+    size      = "75% 60%"
+    lazy      = "true"
+
+[scratchpads.ollama-menu]
+    #Dropdown terminal with Ollama chat
+    animation = "fromBottom"
+    class     = "ollama-menu"
+    command   = "[term_with_class] ollama-dropdown ~/.scripts/ollama/ollama-menu.sh"
+    max_size  = "90% 100%"
+    size      = "75% 60%"
+    lazy      = "true"
+
+[scratchpads.ollama-quick]
+    #Dropdown terminal with Ollama chat
+    animation = "fromBottom"
+    class     = "ollama-quick"
+    command   = "[term_with_class] ollama-dropdown ~/.scripts/ollama/ollama-menu.sh -q"
+    max_size  = "90% 100%"
+    size      = "75% 60%"
+    lazy      = "true"
+    unfocus   = "hide"

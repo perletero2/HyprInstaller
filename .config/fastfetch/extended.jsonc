@@ -1,0 +1,259 @@
+//
+//
+//  ░█▀▀░█▀█░█▀▄░█▀▀░█▀█░█░█░█▀█░█░█░█▀▄░░░█▀█░█▀▀
+//  ░█▀▀░█░█░█░█░█▀▀░█▀█░▀▄▀░█░█░█░█░█▀▄░░░█░█░▀▀█
+//  ░▀▀▀░▀░▀░▀▀░░▀▀▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░░░▀▀▀░▀▀▀
+//  ░░░░░░░█▀▀░█▀█░█▀▀░▀█▀░█▀▀░█▀▀░▀█▀░█▀▀░█░█
+//  ░░░░░░░█▀▀░█▀█░▀▀█░░█░░█▀▀░█▀▀░░█░░█░░░█▀█
+//  ░░░░░░░▀░░░▀░▀░▀▀▀░░▀░░▀░░░▀▀▀░░▀░░▀▀▀░▀░▀
+//
+//  Inspired by many and cobbled to swh's needs
+
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+                 "type": "auto",
+      "source":  "\"$(fastfetch.sh logo)\"",
+      "padding": {
+          "top": 4,
+          "left": 2,
+          "right": 2
+
+        }
+             },
+    "display": {
+        "separator": "   "
+    },
+
+  "modules": [
+
+        {
+            "type": "custom",
+            "format": "Coffee  , Sleep  , EndeavourOS   !"
+                },
+        {
+            "type": "custom",
+            "typeColor": "grey",
+            "format": "\u001b[30m────────────────────\u001b[0m" // `\u001b` is `\033`, or `\e`
+        },
+
+        {
+            "type": "version",
+            "key": " "
+        },
+                   {
+            "type": "custom",
+            "typeColor": "grey",
+            "format": "\u001b[30m────────────────────\u001b[0m" // `\u001b` is `\033`, or `\e`
+        },
+
+      "break",
+
+        {
+            "type": "custom",
+            "format": "\u001b[m{#33}  System Info\u001b[0m"
+        },
+        "break",
+
+        {
+            "type": "os",
+            "key": "  OS         ",
+            "keyColor": "34",
+        },
+        {
+            "type": "de",
+            "key": "  DE         ",
+            "keyColor": "34",
+        },
+        {
+            "type": "wm",
+            "key": "  WM         ",
+            "keyColor": "34",
+        },
+        {
+            "type": "kernel",
+            "key": "  Kernel     ",
+            "keyColor": "34",
+        },
+        {
+            "type": "packages",
+            "key": "󰮯  Packages   ",
+            "keyColor": "34",
+        },
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[m{#33}  Terminal\u001b[0m"
+        },
+        "break",
+        {
+            "type": "terminal",
+            "key": "  Terminal   ",
+            "keyColor": "34",
+        },
+        {
+            "type": "terminalfont",
+            "key": "  Font       ",
+            "keyColor": "34",
+        },
+        {
+            "type": "shell",
+            "key": "󱆃  Shell      ",
+            "keyColor": "34",
+        },
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[m{#33}  Eyecandy \u001b[0m"
+        },
+        "break",
+        {
+            "type": "theme",
+            "key": "  Style      ",
+            "keyColor": "34",
+        },
+        {
+            "type": "wmtheme",
+            "key": "  Decor      ",
+            "keyColor": "34",
+        },
+        {
+            "type": "icons",
+            "key": "  Icon Set   ",
+            "keyColor": "34",
+        },
+        {
+            "type": "cursor",
+            "key": "󰳽  Cursors    ",
+            "keyColor": "34",
+        },
+        {
+            "type": "font",
+            "key": "󰛖  System Font",
+            "keyColor": "34",
+        },
+        "break",
+         {
+            "type": "custom",
+            "format": "\u001b[m{#33}  Starship \u001b[0m"
+        },
+        "break",
+        {
+            "type": "host",
+            "key": "󰇅  Machine    ",
+            "keyColor": "34",
+        },
+        {
+            "type": "monitor",
+            "key": "󰍹  Screen     ",
+            "keyColor": "34",
+        },
+        {
+            "type": "cpu",
+            "key": "  CPU        ",
+            "keyColor": "34",
+        },
+        {
+            "type": "gpu",
+            "key": "  GPU        ",
+            "keyColor": "34",
+        },
+        {
+            "type": "vulkan",
+            "key": "  GFX        ",
+            "keyColor": "34",
+        },
+        {
+            "type": "disk",
+            "keyColor": "34",
+            "key": "  SSD        ",
+            "percent": {
+        "type": 3,           // 3 = show number + bar + percentage
+        "green": 30,         // Below 30% usage is green
+        "yellow": 70         // 30-70% is yellow, >70% is red
+      },
+      "bar": {
+        "width": 20,         // Number of characters for the bar
+        "charElapsed": "■",  // Used bar character
+        "charTotal": "-",    // Unused bar character
+        "borderLeft": "[",
+        "borderRight": "]"
+      }
+        },
+        {
+            "type": "memory",
+            "key": "  Memory     ",
+            "keyColor": "34",
+            "percent": {
+        "type": 3, // 3 = show number + bar + percentage
+        "green": 30, // <30% is green
+        "yellow": 70 // 30-70% is yellow, >70% is red
+      },
+      "bar": {
+        "width": 20, // number of characters in the bar
+        "charElapsed": "■", // used part of the bar
+        "charTotal": "-", // unused part of the bar
+        "borderLeft": "[",
+        "borderRight": "]"
+      }
+        },
+        {
+            "type": "swap",
+            "key": "󰯍  Swap       ",
+            "keyColor": "34",
+             "percent": {
+        "type": 3,
+        "green": 30,
+        "yellow": 70
+      },
+      "bar": {
+        "width": 20,
+        "charElapsed": "■",
+        "charTotal": "-",
+        "borderLeft": "[",
+        "borderRight": "]"
+      }
+        },
+        {
+            "type": "uptime",
+            "key": "  Uptime     ",
+            "keyColor": "34",
+        },
+        {
+            "type": "command",
+            "key": "  OS Age     ",
+            "keyColor": "34",
+            "text": "birth_install=$(stat -c %W /); current=$(date +%s); time_progression=$((current - birth_install)); days_difference=$((time_progression / 86400)); echo $days_difference days"
+        },
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[m{#33}  Now Playing \u001b[0m"
+        },
+        "break",
+                {
+            "type": "sound",
+            "key": "  Sound      ",
+            "keyColor": "34",
+        },
+        {
+            "type": "media",
+            "key": "  {#32}󱑽{#32}󱑽{#32}󱑽{#32}󱑽{#32}󱑽{#32}󱑽{#32}󱑽{#33}󱑽{#33}󱑽{#31}󱑽{#31}󱑽",
+            "keyColor": "34",
+        },
+        {
+            "type": "player",
+            "key": "󱀞  {#32}󱑽{#32}󱑽{#32}󱑽{#32}󱑽{#32}󱑽{#32}󱑽{#32}󱑽{#33}󱑽{#33}󱑽{#31}󱑽{#31}󱑽",
+            "keyColor": "34",
+        },
+        "break",
+        {
+            "type": "custom",
+            "key": "{#31}  {#31}C{#32}o{#33}l{#34}o{#32}u{#35}r{#36}s    ",
+            "format":"{#33}󰮯 {#37}  {#36} 󰊠 {#35} 󰊠 {#34} 󰊠 {#33} 󰊠 {#32} 󰊠 {#31} 󰊠 {#37} 󰊠 "
+        },
+        "break",
+        "break",
+
+    ]
+}
