@@ -78,7 +78,8 @@ install_packages_from_file() {
         if [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]]; then
             continue
         fi
-        # Trim whitespace
+        # Remove inline comments and trim whitespace
+        line="${line%%#*}"
         line=$(echo "$line" | xargs)
         if [[ -n "$line" ]]; then
             packages+=("$line")
