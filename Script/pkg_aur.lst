@@ -1,0 +1,17 @@
+# AUR packages to be installed via yay
+# Add more packages as needed, one per line
+
+# --------------------------------------------------- // Window Manager
+wlogout                                                 # logout menu
+
+# --------------------------------------------------- // Apps
+pear-desktop-bin                                        # Youtube-Music
+vesktop                                                 # Discord Client
+
+# --------------------------------------------------- // Terminal
+oh-my-zsh-git                                           # ZSH Config/Plugins manager
+zsh-theme-powerlevel10k-git                             # Powerlevel10k terminal theme
+pacseek                                                 # Pacman/AUR TUI Helper
+
+# --------------------------------------------------- // Utilities
+protonup-qt                                             # Pronton GUI Manager

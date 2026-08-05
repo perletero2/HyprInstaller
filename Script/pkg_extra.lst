@@ -1,0 +1,13 @@
+# Optional extra packages - edit before install
+# Add packages as needed, one per line
+
+# --------------------------------------------------- // Apps
+keepassxc                                               # Password manager
+mpc                                                     # Minimal MPD CLI
+mpd                                                     # MPD music player
+mpd-mpris                                               # Mpris integration for MPD
+rmpc                                                    # MPD TUI Client
+ncdu                                                    # Disk usage analyzer
+ripgrep-all                                             # Ripgrep + files like pdf
+yt-dlp                                                  # Youtube donwload cli
+zoxide                                                  # Smarter cd command
