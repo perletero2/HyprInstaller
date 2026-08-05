@@ -85,7 +85,6 @@ install_packages_from_file() {
             packages+=("$line")
         fi
     done < "$package_file"
-
     if [[ ${#packages[@]} -eq 0 ]]; then
         log_warn "No packages to install from $package_file"
         return
