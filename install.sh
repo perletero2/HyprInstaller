@@ -228,7 +228,7 @@ main() {
     deploy_dotfiles
 
     log_info "Hyprland installation complete!"
-    log_info "You may need to log out and back in for changes to take effect."
+    log_info "You should reboot before going further."
 }
 
 # Run main function
