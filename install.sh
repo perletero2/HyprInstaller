@@ -139,6 +139,8 @@ install_aur_packages() {
         if [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]]; then
             continue
         fi
+        # Remove inline comments and trim whitespace
+        line="${line%%#*}"
         line=$(echo "$line" | xargs)
         if [[ -n "$line" ]]; then
             packages+=("$line")
