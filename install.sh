@@ -96,29 +96,61 @@ install_packages_from_file() {
     sudo pacman -S --needed --noconfirm "${packages[@]}"
 }
 
-# Deploy configuration files from project .config/ source directory
+# Deploy configuration files from project .config/ and .local/ source directories
 # Each subdirectory mirrors the target structure (e.g., Config/hypr/ -> ~/.config/hypr/)
 deploy_configs() {
     local config_source_dir="$SCRIPT_DIR/.config"
+    local local_source_dir="$SCRIPT_DIR/.local"
 
-    if [[ ! -d "$config_source_dir" ]]; then
-        log_warn "Configuration directory not found: $config_source_dir"
-        log_warn "Skipping configuration deployment."
-        return
+    # Deploy .config files
+    if [[ -d "$config_source_dir" ]]; then
+        log_info "Deploying configurations from $config_source_dir..."
+
+        # Check if directory is empty
+        local config_items
+        config_items=$(find "$config_source_dir" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l)
+        if [[ "$config_items" -eq 0 ]]; then
+            log_warn "Configuration directory is empty: $config_source_dir"
+            log_warn "Skipping configuration deployment for .config."
+            return
+        fi
+
+        # Copy all subdirectories to $HOME/.config/ (preserving directory structure)
+        for config_item in "$config_source_dir"/*/; do
+            if [[ -d "$config_item" ]]; then
+                local dir_name
+                dir_name=$(basename "$config_item")
+                log_info "Deploying: $dir_name/"
+                mkdir -p "$HOME/.config/$dir_name"
+                cp -r "$config_item"* "$HOME/.config/$dir_name/"
+            fi
+        done
     fi
 
-    log_info "Deploying configurations from $config_source_dir..."
+    # Deploy .local files
+    if [[ -d "$local_source_dir" ]]; then
+        log_info "Deploying local files from $local_source_dir..."
 
-    # Copy all subdirectories to $HOME/.config/ (preserving directory structure)
-    for config_item in "$config_source_dir"/*/; do
-        if [[ -d "$config_item" ]]; then
-            local dir_name
-            dir_name=$(basename "$config_item")
-            log_info "Deploying: $dir_name/"
-            mkdir -p "$HOME/.config/$dir_name"
-            cp -r "$config_item"* "$HOME/.config/$dir_name/"
+        # Check if directory is empty
+        local local_items
+        local_items=$(find "$local_source_dir" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l)
+        if [[ "$local_items" -eq 0 ]]; then
+            log_warn "Local directory is empty: $local_source_dir"
+            log_warn "Skipping local files deployment for .local."
+            return
         fi
-    done
+
+        # Copy all subdirectories to $HOME/.local/share/ (preserving directory structure)
+        for local_item in "$local_source_dir"/*/; do
+            if [[ -d "$local_item" ]]; then
+                local dir_name
+                dir_name=$(basename "$local_item")
+                log_info "Deploying: $dir_name/"
+                mkdir -p "$HOME/.local/share/$dir_name"
+                cp -r "$local_item"* "$HOME/.local/share/$dir_name/"
+            fi
+        done
+    fi
 
     log_info "Configuration deployment complete."
 }
@@ -196,6 +228,19 @@ deploy_dotfiles() {
     log_info "Dotfile deployment complete."
 }
 
+# Display the main menu
+show_menu() {
+    echo
+    echo -e "${GREEN}=== Hyprland Installer Menu ===${NC}"
+    echo "  1. Full Install"
+    echo "  2. Only install core packages"
+    echo "  3. Only install additional packages"
+    echo "  4. Only Install/Update configs and dotfiles"
+    echo
+    read -p "Please select an option [1-4]: " -n 1 -r
+    echo
+}
+
 # Main function
 main() {
     log_info "Starting Hyprland installer..."
@@ -205,30 +250,53 @@ main() {
     check_pacman
     check_yay
 
-    # Update package database (use -Syu to prevent partial upgrades)
-    log_info "Updating package database..."
-    sudo pacman -Syu --noconfirm
+    # Show menu and get user selection
+    show_menu
+    read -r choice
 
-    # Install Hyprland (use --needed to skip already installed packages)
-    log_info "Installing Hyprland..."
-    sudo pacman -S --needed --noconfirm hyprland
-
-    # Install core packages
-    log_info "Installing core packages..."
-    install_packages_from_file "$SCRIPT_DIR/Script/pkg_core.lst"
-
-    # Install extra packages
-    log_info "Installing extra packages..."
-    install_packages_from_file "$SCRIPT_DIR/Script/pkg_extra.lst"
-
-    # Install AUR packages (optional - ask user)
-    install_aur_packages
-
-    # Deploy configuration files
-    deploy_configs
-
-    # Deploy dotfiles
-    deploy_dotfiles
+    case "$choice" in
+        1)
+            # Full Install
+            log_info "Running full installation..."
+            # Update package database
+            log_info "Updating package database..."
+            sudo pacman -Syu --noconfirm
+            # Install Hyprland
+            log_info "Installing Hyprland..."
+            sudo pacman -S --needed --noconfirm hyprland
+            # Install core packages
+            log_info "Installing core packages..."
+            install_packages_from_file "$SCRIPT_DIR/Script/pkg_core.lst"
+            # Install extra packages
+            log_info "Installing extra packages..."
+            install_packages_from_file "$SCRIPT_DIR/Script/pkg_extra.lst"
+            # Install AUR packages
+            install_aur_packages
+            # Deploy configs and dotfiles
+            deploy_configs
+            deploy_dotfiles
+            ;;
+        2)
+            # Only core packages
+            log_info "Installing only core packages..."
+            install_packages_from_file "$SCRIPT_DIR/Script/pkg_core.lst"
+            ;;
+        3)
+            # Only additional packages
+            log_info "Installing only additional packages..."
+            install_packages_from_file "$SCRIPT_DIR/Script/pkg_extra.lst"
+            ;;
+        4)
+            # Only configs and dotfiles
+            log_info "Installing/Updating configs and dotfiles..."
+            deploy_configs
+            deploy_dotfiles
+            ;;
+        *)
+            log_error "Invalid option selected. Please run the script again and choose a valid option."
+            exit 1
+            ;;
+    esac
 
     log_info "Hyprland installation complete!"
     log_info "You should reboot before going further."
