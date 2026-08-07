@@ -120,8 +120,7 @@ deploy_configs() {
                 local dir_name
                 dir_name=$(basename "$config_item")
                 log_info "Deploying: $dir_name/"
-                mkdir -p "$HOME/.config/$dir_name"
-                cp -r "$config_item" "$HOME/.config/$dir_name/"
+                cp -rf "$config_item"/* "$HOME/.config/$dir_name/"
             fi
         done
     fi
@@ -145,8 +144,7 @@ deploy_configs() {
                 local dir_name
                 dir_name=$(basename "$local_item")
                 log_info "Deploying: $dir_name/"
-                mkdir -p "$HOME/.local/share/$dir_name"
-                cp -r "$local_item" "$HOME/.local/share/$dir_name/"
+                cp -rf "$local_item"/* "$HOME/.local/share/$dir_name/"
             fi
         done
     fi
